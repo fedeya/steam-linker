@@ -1,0 +1,16 @@
+name: Generate json file with steam apps
+on:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+     
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Create file
+        run: |
+          wget -O app/data/steamApps.json https://api.steampowered.com/ISteamApps/GetAppList/v0002/?key=STEAMKEY&format=json
+      
+      - uses: stefanzweifel/git-auto-commit-action@v4
